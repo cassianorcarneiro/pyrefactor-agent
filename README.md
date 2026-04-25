@@ -63,3 +63,7 @@ Edit `config.py` to change:
 - **Behavior preservation is best-effort, not guaranteed.** Always run your test suite against the refactored output before deploying.
 - For best results on Python code, use a code-specialized model (`deepseek-coder`, `qwen2.5-coder`, `codellama`). General chat models are noticeably worse at this task.
 - Lower temperatures = more reliable output. The defaults (0.0–0.1) are deliberate.
+
+---
+### AI Assistance Disclosure
+The codebase architecture, organizational structure, and stylistic formatting of this repository were refactored and optimized leveraging [Claude](https://www.anthropic.com/claude) by Anthropic. All core business logic and intellectual property remain the work of the repository authors and are governed by the project's license.
