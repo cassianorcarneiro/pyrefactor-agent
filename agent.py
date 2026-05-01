@@ -874,8 +874,4 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    # Note: deliberately NOT calling os.system("clear") here. In some
-    # terminals (Windows without TERM, IDEs, redirected output) it can
-    # hide initial error messages. Run `clear && python agent.py` if you
-    # want a fresh screen.
     main()
