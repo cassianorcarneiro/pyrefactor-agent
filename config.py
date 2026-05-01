@@ -14,13 +14,29 @@ class Config:
     """Configuration for the Python refactoring agent."""
 
     # ----- Ollama settings -----
+    # A code-specialized model is strongly recommended. General chat models
+    # are noticeably worse at preserving Python semantics during refactoring.
     ollama_model: str = "deepseek-coder"
-    ollama_base_url: str = "http://localhost:11434"
+    ollama_base_url: str = "http://127.0.0.1:11434"
+
+    # Optional per-agent model overrides. Empty string means "use default".
+    # Useful when you want a larger model only for the aggregator (the most
+    # demanding step) while keeping fast models on the drafters.
+    ollama_model_translator: str = ""
+    ollama_model_refactorer: str = ""
+    ollama_model_documenter: str = ""
+    ollama_model_aggregator: str = ""
 
     # ----- LLM temperatures (lower = more deterministic, important for code) -----
-    temperature_planner: float = 0.0
-    temperature_drafters: float = 0.1
+    temperature_translator: float = 0.0
+    temperature_refactorer: float = 0.1
+    temperature_documenter: float = 0.1
     temperature_aggregator: float = 0.0
+
+    # ----- Robustness -----
+    # If the aggregator's output fails AST validation, retry the aggregator
+    # this many times before falling back to a draft.
+    aggregator_ast_retries: int = 1
 
     # ----- File handling -----
     output_suffix: str = "_refactored"
@@ -38,3 +54,6 @@ class Config:
 
     # ----- LLM context limits -----
     max_code_chars: int = 12000   # Truncate very long files for the LLM
+
+    # ----- Versioned prompts -----
+    prompts_dir: str = "./prompts"
